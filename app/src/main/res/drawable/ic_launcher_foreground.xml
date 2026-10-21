@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Feuille avec coins de cadrage et cadenas -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="@color/icon_fg"
+        android:pathData="M40,34h22l8,8v32a2,2 0,0 1,-2 2H40a2,2 0,0 1,-2 -2V36a2,2 0,0 1,2 -2z" />
+    <path android:fillColor="@color/icon_bg"
+        android:pathData="M49,56v-3a5,5 0,0 1,10 0v3h1.5a1.5,1.5 0,0 1,1.5 1.5v8a1.5,1.5 0,0 1,-1.5 1.5h-13a1.5,1.5 0,0 1,-1.5 -1.5v-8a1.5,1.5 0,0 1,1.5 -1.5zM52,56h4v-3a2,2 0,0 0,-4 0z" />
+    <path android:strokeColor="@color/icon_fg" android:strokeWidth="3"
+        android:pathData="M30,38v-8h8M78,38v-8h-8M30,70v8h8M78,70v8h-8" />
+</vector>
