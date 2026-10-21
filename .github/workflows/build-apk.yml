@@ -1,0 +1,51 @@
+# Construit l'APK à chaque envoi sur main et le publie dans « Releases ».
+name: Construire l'APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Compiler l'APK
+        run: gradle --no-daemon assembleDebug
+
+      - name: Renommer l'APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk SecureDocScanner.apk
+
+      - name: Garder l'APK comme artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SecureDocScanner-apk
+          path: SecureDocScanner.apk
+
+      - name: Publier dans Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: SecureDoc Scanner (version ${{ github.run_number }})
+          body: |
+            APK de test, à installer directement sur un téléphone Android 8.0 ou plus récent.
+            Sur le téléphone : téléchargez SecureDocScanner.apk, ouvrez-le, puis autorisez l'installation depuis cette source.
+            Compilé depuis le commit ${{ github.sha }}.
+          files: SecureDocScanner.apk
+          make_latest: true
